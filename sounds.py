@@ -9,12 +9,13 @@
 # 11 - Player turn
 # 12 - You Made it! synth
 #
-# Music: Total 6 songs
+# Music: Total 7 songs
 
 import pygame.mixer as MIXER
 from random import randint
 
 CURRSONG = -1
+NSONGS = 6
 FXON = True
 MUSICON = True
 MIXER.init()
@@ -77,7 +78,7 @@ def play_music(index):
 def play_music_random():
 	if not MUSICON: return
 	index = -1
-	while index==CURRSONG:index = randint(1,6)
+	while index==CURRSONG:index = randint(1,NSONGS)
 	try:
 		MIXER.music.load("music/m"+str(index)+".ogg")
 	except:
