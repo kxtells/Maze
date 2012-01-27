@@ -177,7 +177,7 @@ def update_scene():
 	pygame.draw.rect(window, blue, LEVEL.START)
 	
 	if len(LEVEL.CHECKPOINTS) > 0:
-		pygame.draw.rect(window, blue, LEVEL.END)
+		pygame.draw.rect(window, gray, LEVEL.END)
 	else:
 		pygame.draw.rect(window, red, LEVEL.END)
 	
@@ -213,7 +213,6 @@ def maze_colision():
 		MESSAGE.set_text(get_death_string(len(LEVEL.VISITED)))
 		PLAYER.set_to_start()
 		LEVEL.reset()
-		MESSAGE.move_in()
 
 def checkpoints_colision():
 	for index,c in enumerate(LEVEL.CHECKPOINTS):

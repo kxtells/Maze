@@ -12,6 +12,7 @@ white = 255,255,255
 orange = 255,174,0
 purple = 145,0,145
 lblue = (164,180,255)
+gray = (125,125,125)
 
 COLOR_ARRAY = [purple,green,blue,red,orange,(0,107,31),(164,180,255)]
 def random_color():

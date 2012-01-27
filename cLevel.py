@@ -14,7 +14,7 @@ class cLevel():
 		self.MAZERECTS = []
 
 		self.START = Rect(0,0,sqw,sqh) 
-		self.END = Rect(800-sqw*3,600-sqh*3,sqw*3,sqh*3)
+		#self.END = Rect(800-sqw*3,600-sqh*3,sqw*3,sqh*3)
 		#self.OBSTACLES = self.generate_obstacles(nobstacles,ow,oh)
 		
 
@@ -24,8 +24,10 @@ class cLevel():
 		self.MAZERECTS = self.maze_to_rects(maze.maze,1)
 		
 		self.VISITED = []
-		self.CHECKPOINTS = self.generate_checkpoints(maze.maze,5)
+		self.CHECKPOINTS = self.generate_checkpoints(maze.maze,6)
 		
+		#the last selected checkpoint is the exit
+		self.END = self.CHECKPOINTS.pop()
 		self.fgcolor = COLOR.white
 		self.bgcolor = COLOR.random_color() 
 		
