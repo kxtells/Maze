@@ -7,6 +7,7 @@
 # 2 - all Checkpoints
 # 3..10: Player moves, random sound
 # 11 - Player turn
+# 12 - You Made it! synth
 #
 # Music: Total 6 songs
 
@@ -21,7 +22,7 @@ MIXER.init()
 #FX = [MIXER.Sound("fx/fx0.ogg")]
 FX = []
 
-for f in range(12):
+for f in range(13):
 	fx = MIXER.Sound("fx/fx"+str(f)+".ogg")
 	FX.append(fx)
 

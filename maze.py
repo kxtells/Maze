@@ -228,6 +228,7 @@ def checkpoints_colision():
 def colision_handling():
 	if PLAYER.rect.colliderect(LEVEL.END) and len(LEVEL.CHECKPOINTS)==0:
 		MESSAGE.set_text(get_end_string())
+		SOUNDS.play_fx(12)
 		PLAYER.set_to_start()
 		new_level()
 	
