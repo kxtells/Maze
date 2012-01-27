@@ -7,17 +7,17 @@ ENDSTRINGS = ["Congrats!","Ok, Next one"]
 
 CP1 = ["First One!","Only 4 to go","Beh, only one","That was easy right?"]
 CP2 = ["Second One!","Two is better than one","Like my number of balls","Tweenies"]
-CP3 = ["Third One!"]
-CP4 = ["Fourth One!","One More to Go baby!"]
-CP5 = ["Fifth one One!", "Go for it!","The GOAL is waiting","Warm Goal waiting"]
+CP3 = ["Third One!","Only 2 to go","Almost done"]
+CP4 = ["Fourth!","One More to Go baby!","You are making a nice performance","Already tired?"]
+CP5 = ["Fifth!", "Go for it!","The GOAL is waiting","Warm Goal waiting","Go Go Go!"]
 CHPSTRINGS = [CP1,CP2,CP3,CP4,CP5]
 
-D0 = ["Early Death!","You don't even tried","Not even a Checkpoint eh.."]
-D1 = ["At least you tried","Well, is no that bad","You learnt something?"]
+D0 = ["Early Death!","You don't even tried","Not a Checkpoint eh..","Dude, so bad"]
+D1 = ["At least you tried","Well, is no that bad","You learnt something?","What a pity"]
 D2 = ["Death in the middle","Two and dead","Dead and two checkpoints","...","Don't no that again"]
 D3 = ["Not Bad","Start again","Death with 3 is better than death with 5","Well, not close to win"]
 D4 = ["Almost","So Close","not now..","Cmon!"]
-D5 = ["Oh Shit!","I hate you","Oh no! not again","Having Fun?"]
+D5 = ["Oh Shit!","I hate you","Oh no! not again","Having Fun?","And here we go again"]
 DEATHSTRINGS = [D0,D1,D2,D3,D4,D5]
 
 def get_checkpoint_string(ncheckpoints):
