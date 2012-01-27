@@ -10,7 +10,7 @@ class cMsg():
 	def __init__(self,string,window):
 		font.init()
 		self.text = string
-        	self.myfont = font.SysFont("Arial", 15)
+        	self.myfont = font.SysFont("Arial", 20)
         	self.render_font = self.myfont.render(string, 1, C.black)
 		w = self.render_font.get_width()
 		h = self.render_font.get_height()
