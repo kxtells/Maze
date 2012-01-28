@@ -40,6 +40,9 @@ skey_img = pygame.image.load("img/skey.png").convert_alpha()
 
 
 def main_menu_selection():
+	"""
+		What to do on menu selection
+	"""
 	global show_menu
         PLAYER.set_speed(main_menu.current+1)
 	show_menu = False
@@ -48,17 +51,25 @@ main_menu.action_function = main_menu_selection
 
 
 def new_level():
+	"""
+		Create a new level
+		Clear player pathlist
+		Select another random music
+	"""
 	global LEVEL
 	LEVEL = cLevel.cLevel()
 	PLAYER.clear_pathlist()
 	SOUNDS.play_music_random()
 
-def reload_game():
+def go_to_menu():
+	"""
+		Return to game menu.
+	"""
 	global show_menu
 	show_menu = True
-	new_level()
-	PLAYER.set_to_start()
-	PLAYER.clear_pathlist()
+	#new_level()
+	#PLAYER.set_to_start()
+	#PLAYER.clear_pathlist()
 
 def draw_maze():
 	for r in LEVEL.MAZERECTS:
@@ -283,7 +294,7 @@ def game_event_handler(event):
                 	elif event.key in UP_K: PLAYER.move_up();
                 	elif event.key in LEFT_K: PLAYER.move_left();
                 	elif event.key in RIGHT_K: PLAYER.move_right();
-                	elif event.key == pygame.K_ESCAPE: reload_game()
+                	elif event.key == pygame.K_ESCAPE: go_to_menu()
 
 		#Pause Button
                 #elif event.key == pygame.K_ESCAPE or event.key == pygame.K_p: status.pause_game()
@@ -293,7 +304,7 @@ def main():
         	for event in pygame.event.get(): game_event_handler(event)
 	
 		
-		update_logic()
+		if not show_menu: update_logic()
 		update_scene()
 		colision_handling()
 		MESSAGE.draw(window)
