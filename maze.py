@@ -256,9 +256,15 @@ RIGHT_K = [pygame.K_RIGHT]
 def game_event_handler(event):
 	if event.type == pygame.QUIT: pygame.quit();sys.exit()
  	if event.type == pygame.KEYDOWN:
-        	if event.key == pygame.K_p: PLAYER.toggle_sounds();
-        	if event.key == pygame.K_s: SOUNDS.toggle_fx();
-        	if event.key == pygame.K_m: SOUNDS.toggle_music();
+        	if event.key == pygame.K_p: 
+			PLAYER.toggle_sounds();
+			MESSAGE.set_text("AAA")
+        	if event.key == pygame.K_s: 
+			SOUNDS.toggle_fx();
+			MESSAGE.set_text("AAA")
+        	if event.key == pygame.K_m: 
+			SOUNDS.toggle_music();
+			MESSAGE.set_text("Enjoying the Music?")
 	
 	
 	if show_menu:
