@@ -77,3 +77,4 @@ class cPlayer():
 	def toggle_sounds(self):
 		if self.sounds: self.sounds = False
 		else: self.sounds = True
+		return self.sounds

@@ -257,14 +257,17 @@ def game_event_handler(event):
 	if event.type == pygame.QUIT: pygame.quit();sys.exit()
  	if event.type == pygame.KEYDOWN:
         	if event.key == pygame.K_p: 
-			PLAYER.toggle_sounds();
-			MESSAGE.set_text("AAA")
+			b = PLAYER.toggle_sounds();
+			if b: MESSAGE.set_text("Player Sounds ON")
+			else: MESSAGE.set_text("Muted Player, is it annoying?")
         	if event.key == pygame.K_s: 
-			SOUNDS.toggle_fx();
-			MESSAGE.set_text("AAA")
+			b = SOUNDS.toggle_fx();
+			if b: MESSAGE.set_text("FX on ")
+			else: MESSAGE.set_text("FX off")
         	if event.key == pygame.K_m: 
-			SOUNDS.toggle_music();
-			MESSAGE.set_text("Enjoying the Music?")
+			b = SOUNDS.toggle_music();
+			if b: MESSAGE.set_text("Enjoy the Music and the loops!")
+			else: MESSAGE.set_text("Music off! is getting on your nerves?")
 	
 	
 	if show_menu:

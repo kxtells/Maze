@@ -32,6 +32,7 @@ def toggle_fx():
 	global FXON
 	if FXON: FXON = False
 	else: FXON = True
+	return FXON
 
 def toggle_music():
 	global MUSICON
@@ -41,6 +42,7 @@ def toggle_music():
 	else: 
 		MIXER.music.play()
 		MUSICON = True
+	return MUSICON
 
 def play_fx(ids):
 	"""
