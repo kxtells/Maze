@@ -84,6 +84,41 @@ def draw_checkpoints():
 	for r in LEVEL.VISITED:
 		pygame.draw.rect(window, green, pygame.Rect(r).move(-1,-1))
 		pygame.draw.rect(window, green, r)
+
+def update_scene():
+	"""
+		Update all the rectangles in scene
+	"""
+	window.fill(black)
+	
+	
+	#for o in LEVEL.OBSTACLES:
+	#	pygame.draw.rect(window, white, o)
+	
+	pygame.draw.rect(window, blue, LEVEL.START)
+	
+	if len(LEVEL.CHECKPOINTS) > 0:
+		pygame.draw.rect(window, gray, LEVEL.END)
+	else:
+		for i in xrange(5):
+			pygame.draw.rect(window, random_color(), LEVEL.END.inflate(-i*2,-i*2))
+		
+		pygame.draw.rect(window, red, LEVEL.END.inflate(-6*2,-6*2))
+	
+	draw_maze()
+	draw_checkpoints()
+	
+	
+	
+	for path in PLAYER.pathlist:
+		pygame.draw.lines(window, orange, False, path)
+		pygame.draw.circle(window, orange, path[-1],3) 
+
+	pygame.draw.lines(window, green, False, PLAYER.path+[PLAYER.rect.center])
+	pygame.draw.rect(window, red, PLAYER.rect)
+
+
+
 #
 # Draws a menu on screen 
 # - menu (the menu to draw)
@@ -174,35 +209,6 @@ def draw_cheatsheet():
 
 	window.blit(font4, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
 	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*4))
-
-def update_scene():
-	"""
-		Update all the rectangles in scene
-	"""
-	window.fill(black)
-	
-	
-	#for o in LEVEL.OBSTACLES:
-	#	pygame.draw.rect(window, white, o)
-	
-	pygame.draw.rect(window, blue, LEVEL.START)
-	
-	if len(LEVEL.CHECKPOINTS) > 0:
-		pygame.draw.rect(window, gray, LEVEL.END)
-	else:
-		pygame.draw.rect(window, red, LEVEL.END)
-	
-	draw_maze()
-	draw_checkpoints()
-	
-	
-	
-	for path in PLAYER.pathlist:
-		pygame.draw.lines(window, orange, False, path)
-		pygame.draw.circle(window, orange, path[-1],3) 
-
-	pygame.draw.lines(window, green, False, PLAYER.path+[PLAYER.rect.center])
-	pygame.draw.rect(window, red, PLAYER.rect)
 
 
 
