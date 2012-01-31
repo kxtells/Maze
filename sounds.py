@@ -15,7 +15,7 @@ import pygame.mixer as MIXER
 from random import randint
 
 CURRSONG = -1
-NSONGS = 6
+NSONGS = 9
 FXON = True
 MUSICON = True
 MIXER.init()
