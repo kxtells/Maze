@@ -23,6 +23,7 @@ LEVEL = cLevel.cLevel()
 
 show_menu = True
 show_credits = False
+endgame = False
 
 SOUNDS.play_music(9)
 MESSAGE = cMsg.cMsg("TEST",window)
@@ -230,6 +231,23 @@ def draw_logo():
 	lh = logo_img.get_height()
 	window.blit(logo_img,logo_img.get_rect().move(width-lw,height-lh))
 
+def draw_exit_game():
+	"""
+		What to draw on exiting the game
+	"""
+	window.fill(black)
+	lw = logo_img.get_width()
+	lh = logo_img.get_height()
+	window.blit(logo_img,logo_img.get_rect().move(0,200))
+	
+	myfont = pygame.font.SysFont("Arial", 50)
+	myfont2 = pygame.font.SysFont("Arial", 25)
+	title = myfont.render("Thanks for Playing!",1,white)
+	text = myfont2.render("www.borinotgames.com",1,white)
+	window.blit(title,(200,250))
+	window.blit(text,(200,300))
+
+
 def draw_explanation():
 	"""
 		How to play the game
@@ -262,7 +280,7 @@ def draw_cheatsheet():
 
 	title = titlefont.render("CheatSheet",1,black)
         font = myfont.render("Return to this screen", 1, blue) 
-        font2 = myfont.render("Un/Mute Player sounds", 1, blue) 
+        font2 = myfont.render("Exit Game", 1, blue) 
         font3 = myfont.render("Un/Mute General sounds", 1, blue) 
         font4 = myfont.render("Un/Mute Music", 1, blue) 
         font5 = myfont.render("Credits", 1, blue) 
@@ -281,17 +299,18 @@ def draw_cheatsheet():
 	window.blit(font, (sx + esckey_img.get_width(), sy + esckey_img.get_height()/2))
 	window.blit(esckey_img,esckey_img.get_rect().move(sx,sy))
 
-	#window.blit(font2, (sx + esckey_img.get_width(), sy*2 + esckey_img.get_height()/2))
-	#window.blit(pkey_img,esckey_img.get_rect().move(sx,sy*2))
+	window.blit(font2, (sx + esckey_img.get_width()*2, sy*2 + esckey_img.get_height()/2))
+	window.blit(esckey_img,esckey_img.get_rect().move(sx,sy*2))
+	window.blit(esckey_img,esckey_img.get_rect().move(sx+esckey_img.get_width(),sy*2))
 
-	window.blit(font3, (sx + esckey_img.get_width(), sy*2 + esckey_img.get_height()/2))
-	window.blit(skey_img,esckey_img.get_rect().move(sx,sy*2))
+	window.blit(font3, (sx + esckey_img.get_width(), sy*3 + esckey_img.get_height()/2))
+	window.blit(skey_img,esckey_img.get_rect().move(sx,sy*3))
 
-	window.blit(font4, (sx + esckey_img.get_width(), sy*3 + esckey_img.get_height()/2))
-	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*3))
+	window.blit(font4, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
+	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*4))
 
-	window.blit(font5, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
-	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*4))
+	window.blit(font5, (sx + esckey_img.get_width(), sy*5 + esckey_img.get_height()/2))
+	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*5))
 
 
 def maze_colision():
@@ -378,6 +397,7 @@ def game_event_handler(event):
         	        if event.key == pygame.K_DOWN: main_menu.menu_down();
         	        elif event.key == pygame.K_UP: main_menu.menu_up();
         	        elif event.key == pygame.K_RETURN: main_menu.action_function()
+                	elif event.key == pygame.K_ESCAPE: exit_game()
 			else:
 				if main_menu.event_function != None: main_menu.event_function(event)
 	else:
@@ -390,9 +410,14 @@ def game_event_handler(event):
 
 		#Pause Button
                 #elif event.key == pygame.K_ESCAPE or event.key == pygame.K_p: status.pause_game()
-                
+
+def exit_game():
+	global endgame
+	endgame = True
+
+               
 def main():
-	while True:
+	while not endgame:
         	for event in pygame.event.get(): game_event_handler(event)
 	
 		
@@ -415,5 +440,13 @@ def main():
 		clock.tick(FPS)
                 pygame.display.update()
 
+	#when game finished
+	st_time = pygame.time.get_ticks()
+	waittime = 0
+	while waittime < 5000: #5 seconds
+		waittime = pygame.time.get_ticks() - st_time
+		draw_exit_game()
+		clock.tick(FPS)
+                pygame.display.update()
 
 if __name__ == '__main__': main()  
