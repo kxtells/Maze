@@ -24,7 +24,7 @@ LEVEL = cLevel.cLevel()
 show_menu = True
 show_credits = False
 
-SOUNDS.play_music_random()
+SOUNDS.play_music(9)
 MESSAGE = cMsg.cMsg("TEST",window)
 
 #
@@ -40,6 +40,7 @@ mkey_img = pygame.image.load("img/mkey.png").convert_alpha()
 pkey_img = pygame.image.load("img/pkey.png").convert_alpha()
 skey_img = pygame.image.load("img/skey.png").convert_alpha()
 ckey_img = pygame.image.load("img/ckey.png").convert_alpha()
+logo_img = pygame.image.load("img/borinotlogo.png").convert_alpha()
 
 
 def main_menu_selection():
@@ -224,6 +225,11 @@ def draw_credits():
 		sp_font = myfont.render(st, 1, blue) 
 		window.blit(sp_font, (sx, ay))
 
+def draw_logo():
+	lw = logo_img.get_width()
+	lh = logo_img.get_height()
+	window.blit(logo_img,logo_img.get_rect().move(width-lw,height-lh))
+
 def draw_explanation():
 	"""
 		How to play the game
@@ -399,10 +405,12 @@ def main():
 		if show_menu and not show_credits:
 			draw_menu(main_menu,sx=300)
 			draw_explanation()	
-			draw_cheatsheet()	
+			draw_cheatsheet()
+			draw_logo()	
 	
 		if show_credits:
 			draw_credits()
+			draw_logo()
 
 		clock.tick(FPS)
                 pygame.display.update()
