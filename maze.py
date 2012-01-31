@@ -167,7 +167,8 @@ def draw_credits():
 		Game and Music credits:
 	"""
 	#
-	# Beware! highly bad and unreusable code ahead!
+	# Beware! Dragons ahead
+	# highly bad and unreusable code ahead!
 	# 
         myfont = pygame.font.SysFont("Arial", 15)
         titlefont = pygame.font.SysFont("Arial", 25)
@@ -180,9 +181,9 @@ def draw_credits():
 	title2 = titlefont.render("Music:", 1, black) 
 	
 	sx = 100 
-	sy = 50
+	sy = 15
 	sqw = 400
-	sqh = 450
+	sqh = 560
 	ln=30 #line separation
 	ln_music = ln*4 #where the music attributions
 	
@@ -197,23 +198,21 @@ def draw_credits():
         window.blit(font3, (sx, sy+ln*3))
 
 	#Music
-	last_artist_songs = 0
 	total_offset = 0
 	for i,artist in enumerate(ATTRIBUTION_ARTISTS):
-        	ay = sy+ln_music+(i*ln)+(last_artist_songs*ln)
-		last_artist_songs = 0
+        	ay = sy+ln_music+(i*ln)+(total_offset*ln)
 		total_offset += 1
 		artist_font = myfont.render(artist, 1, blue) 
 		window.blit(artist_font, (sx, ay))
         	
 		for j,song in enumerate(ATTRIBUTION_SONGS[i]):
-			last_artist_songs += 1
-			total_offset += 1
 			csy = ay+(j+1)*ln
         		song_font = myfont.render(song, 1, blue) 
 			window.blit(song_font, (sx+15, csy))
-
-	total_offset = sy+ln_music+total_offset*ln
+		
+		total_offset += j
+	
+	total_offset = sy+ln_music+total_offset*ln+len(ATTRIBUTION_ARTISTS)*ln
         
 	window.blit(referal_font, (sx, total_offset))
         total_offset += ln
@@ -221,7 +220,7 @@ def draw_credits():
 	#Special Thanks
         window.blit(titlethanks, (sx, total_offset))
 	for i,st in enumerate(SPECIAL_THANKS):
-        	ay = sy+total_offset+(i*ln)
+        	ay = sy+total_offset+20+(i*ln)
 		sp_font = myfont.render(st, 1, blue) 
 		window.blit(sp_font, (sx, ay))
 
