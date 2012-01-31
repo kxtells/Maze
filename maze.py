@@ -7,6 +7,7 @@ import sounds as SOUNDS
 from cMenu import cMenu
 from colors import *
 from strings import *
+from attributions import *
 
 
 pygame.init()
@@ -21,6 +22,7 @@ PLAYER = cPlayer.cPlayer(10,10,10,10)
 LEVEL = cLevel.cLevel()
 
 show_menu = True
+show_credits = False
 
 SOUNDS.play_music_random()
 MESSAGE = cMsg.cMsg("TEST",window)
@@ -37,6 +39,7 @@ esckey_img = pygame.image.load("img/esckey.png").convert_alpha()
 mkey_img = pygame.image.load("img/mkey.png").convert_alpha()
 pkey_img = pygame.image.load("img/pkey.png").convert_alpha()
 skey_img = pygame.image.load("img/skey.png").convert_alpha()
+ckey_img = pygame.image.load("img/ckey.png").convert_alpha()
 
 
 def main_menu_selection():
@@ -70,6 +73,14 @@ def go_to_menu():
 	#new_level()
 	#PLAYER.set_to_start()
 	#PLAYER.clear_pathlist()
+
+def toggle_credits():
+	"""
+		Go to Credits Page
+	"""
+	global show_credits
+	if show_credits: show_credits = False
+	else: show_credits = True
 
 def draw_maze():
 	for r in LEVEL.MAZERECTS:
@@ -150,6 +161,69 @@ def draw_menu(menu,sx=200,sy=165):
                 render_font = myfont.render(me, 1, color) 
                 window.blit(render_font, (x, y))
                 y += ymov
+        	
+def draw_credits():
+	"""
+		Game and Music credits:
+	"""
+	#
+	# Beware! highly bad and unreusable code ahead!
+	# 
+        myfont = pygame.font.SysFont("Arial", 15)
+        titlefont = pygame.font.SysFont("Arial", 25)
+	titlefont.set_underline(True)
+        title = titlefont.render("BorinotGames Is:", 1, black) 
+        titlethanks = titlefont.render("Special Thanks to:", 1, black) 
+        font2 = myfont.render("Jordi Castells", 1, blue) 
+        font3 = myfont.render("Music from ccMixter.org and freesound.org", 1, blue) 
+        referal_font = myfont.render("Direct links to the songs can be found on BorinotGames.com", 1, blue) 
+	title2 = titlefont.render("Music:", 1, black) 
+	
+	sx = 100 
+	sy = 50
+	sqw = 400
+	sqh = 450
+	ln=30 #line separation
+	ln_music = ln*4 #where the music attributions
+	
+	#background
+	pygame.draw.rect(window, green, (sx-10,sy+10,sqw,sqh))
+	pygame.draw.rect(window, white, (sx-5,sy-5,sqw+15,sqh))
+
+	#titles and subtitles
+	window.blit(title, (sx, sy))
+        window.blit(font2, (sx, sy+ln))
+	window.blit(title2, (sx, sy+ln*2))
+        window.blit(font3, (sx, sy+ln*3))
+
+	#Music
+	last_artist_songs = 0
+	total_offset = 0
+	for i,artist in enumerate(ATTRIBUTION_ARTISTS):
+        	ay = sy+ln_music+(i*ln)+(last_artist_songs*ln)
+		last_artist_songs = 0
+		total_offset += 1
+		artist_font = myfont.render(artist, 1, blue) 
+		window.blit(artist_font, (sx, ay))
+        	
+		for j,song in enumerate(ATTRIBUTION_SONGS[i]):
+			last_artist_songs += 1
+			total_offset += 1
+			csy = ay+(j+1)*ln
+        		song_font = myfont.render(song, 1, blue) 
+			window.blit(song_font, (sx+15, csy))
+
+	total_offset = sy+ln_music+total_offset*ln
+        
+	window.blit(referal_font, (sx, total_offset))
+        total_offset += ln
+
+	#Special Thanks
+        window.blit(titlethanks, (sx, total_offset))
+	for i,st in enumerate(SPECIAL_THANKS):
+        	ay = sy+total_offset+(i*ln)
+		sp_font = myfont.render(st, 1, blue) 
+		window.blit(sp_font, (sx, ay))
 
 def draw_explanation():
 	"""
@@ -186,6 +260,7 @@ def draw_cheatsheet():
         font2 = myfont.render("Un/Mute Player sounds", 1, blue) 
         font3 = myfont.render("Un/Mute General sounds", 1, blue) 
         font4 = myfont.render("Un/Mute Music", 1, blue) 
+        font5 = myfont.render("Credits", 1, blue) 
         
 	sx = 500
 	sy = 50
@@ -193,8 +268,8 @@ def draw_cheatsheet():
 	ln=20
 
 	
-	pygame.draw.rect(window, green, (sx-10,sy-30,300,300))
-	pygame.draw.rect(window, white, (sx-5,sy-40,300,300))
+	pygame.draw.rect(window, green, (sx-10,sy-30,300,400))
+	pygame.draw.rect(window, white, (sx-5,sy-40,300,400))
 
 	window.blit(title, (sx, sy - 20 ))
 	
@@ -210,6 +285,8 @@ def draw_cheatsheet():
 	window.blit(font4, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
 	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*4))
 
+	window.blit(font5, (sx + esckey_img.get_width(), sy*6 + esckey_img.get_height()/2))
+	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*6))
 
 
 def maze_colision():
@@ -257,7 +334,6 @@ def update_logic():
 	"""
 
 	PLAYER.update_logic()
-	MESSAGE.update_logic(window)
 	#LEVEL.update_obstacles_logic(width,height)
 
 
@@ -272,7 +348,8 @@ RIGHT_K = [pygame.K_RIGHT]
 
 def game_event_handler(event):
 	if event.type == pygame.QUIT: pygame.quit();sys.exit()
- 	if event.type == pygame.KEYDOWN:
+ 	#Changing sounds configuration and credits page
+	if event.type == pygame.KEYDOWN:
         	if event.key == pygame.K_p: 
 			b = PLAYER.toggle_sounds();
 			if b: MESSAGE.set_text("Player Sounds ON")
@@ -286,7 +363,11 @@ def game_event_handler(event):
 			if b: MESSAGE.set_text("Enjoy the Music and the loops!")
 			else: MESSAGE.set_text("Music off! is getting on your nerves?")
 	
-	
+        	if event.key == pygame.K_c: 
+			toggle_credits();
+
+	if show_credits: return #do nothing on credits
+
 	if show_menu:
  		if event.type == pygame.KEYDOWN:
         	        if event.key == pygame.K_DOWN: main_menu.menu_down();
@@ -310,16 +391,20 @@ def main():
         	for event in pygame.event.get(): game_event_handler(event)
 	
 		
-		if not show_menu: update_logic()
+		if not show_menu and not show_credits: update_logic()
+		MESSAGE.update_logic(window)
 		update_scene()
 		colision_handling()
 		MESSAGE.draw(window)
 
-		if show_menu:
+		if show_menu and not show_credits:
 			draw_menu(main_menu,sx=300)
 			draw_explanation()	
 			draw_cheatsheet()	
 	
+		if show_credits:
+			draw_credits()
+
 		clock.tick(FPS)
                 pygame.display.update()
 
