@@ -273,25 +273,25 @@ def draw_cheatsheet():
 	ln=20
 
 	
-	pygame.draw.rect(window, green, (sx-10,sy-30,300,400))
-	pygame.draw.rect(window, white, (sx-5,sy-40,300,400))
+	pygame.draw.rect(window, green, (sx-10,sy-30,300,300))
+	pygame.draw.rect(window, white, (sx-5,sy-40,300,300))
 
 	window.blit(title, (sx, sy - 20 ))
 	
 	window.blit(font, (sx + esckey_img.get_width(), sy + esckey_img.get_height()/2))
 	window.blit(esckey_img,esckey_img.get_rect().move(sx,sy))
 
-	window.blit(font2, (sx + esckey_img.get_width(), sy*2 + esckey_img.get_height()/2))
-	window.blit(pkey_img,esckey_img.get_rect().move(sx,sy*2))
+	#window.blit(font2, (sx + esckey_img.get_width(), sy*2 + esckey_img.get_height()/2))
+	#window.blit(pkey_img,esckey_img.get_rect().move(sx,sy*2))
 
-	window.blit(font3, (sx + esckey_img.get_width(), sy*3 + esckey_img.get_height()/2))
-	window.blit(skey_img,esckey_img.get_rect().move(sx,sy*3))
+	window.blit(font3, (sx + esckey_img.get_width(), sy*2 + esckey_img.get_height()/2))
+	window.blit(skey_img,esckey_img.get_rect().move(sx,sy*2))
 
-	window.blit(font4, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
-	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*4))
+	window.blit(font4, (sx + esckey_img.get_width(), sy*3 + esckey_img.get_height()/2))
+	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*3))
 
-	window.blit(font5, (sx + esckey_img.get_width(), sy*6 + esckey_img.get_height()/2))
-	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*6))
+	window.blit(font5, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
+	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*4))
 
 
 def maze_colision():
@@ -355,10 +355,10 @@ def game_event_handler(event):
 	if event.type == pygame.QUIT: pygame.quit();sys.exit()
  	#Changing sounds configuration and credits page
 	if event.type == pygame.KEYDOWN:
-        	if event.key == pygame.K_p: 
-			b = PLAYER.toggle_sounds();
-			if b: MESSAGE.set_text("Player Sounds ON")
-			else: MESSAGE.set_text("Muted Player, is it annoying?")
+        	#if event.key == pygame.K_p: 
+		#	b = PLAYER.toggle_sounds();
+		#	if b: MESSAGE.set_text("Player Sounds ON")
+		#	else: MESSAGE.set_text("Muted Player, is it annoying?")
         	if event.key == pygame.K_s: 
 			b = SOUNDS.toggle_fx();
 			if b: MESSAGE.set_text("FX on ")
