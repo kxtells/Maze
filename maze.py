@@ -24,6 +24,7 @@ LEVEL = cLevel.cLevel()
 show_menu = True
 show_credits = False
 endgame = False
+fullscreen = False
 
 SOUNDS.play_music(9)
 MESSAGE = cMsg.cMsg("TEST",window)
@@ -75,6 +76,18 @@ def go_to_menu():
 	#new_level()
 	#PLAYER.set_to_start()
 	#PLAYER.clear_pathlist()
+
+def toggle_fullscreen():
+	"""
+		Change between fullscreen and windowed
+	"""
+	global fullscreen
+	if not fullscreen:
+		pygame.display.set_mode((801,601),pygame.FULLSCREEN) #801,601 to force a square around the game
+		fullscreen = True
+	else:
+		pygame.display.set_mode(size)
+		fullscreen = False
 
 def toggle_credits():
 	"""
@@ -371,6 +384,7 @@ LEFT_K = [pygame.K_LEFT]
 RIGHT_K = [pygame.K_RIGHT]
 
 def game_event_handler(event):
+	global window
 	if event.type == pygame.QUIT: pygame.quit();sys.exit()
  	#Changing sounds configuration and credits page
 	if event.type == pygame.KEYDOWN:
@@ -389,6 +403,8 @@ def game_event_handler(event):
 	
         	if event.key == pygame.K_c: 
 			toggle_credits();
+        	if event.key == pygame.K_f: 
+			toggle_fullscreen()
 
 	if show_credits: return #do nothing on credits
 
