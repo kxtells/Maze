@@ -234,11 +234,11 @@ def draw_credits():
         total_offset += ln
 
 	#Special Thanks
-        window.blit(titlethanks, (sx, total_offset))
-	for i,st in enumerate(SPECIAL_THANKS):
-        	ay = sy+total_offset+20+(i*ln)
-		sp_font = myfont.render(st, 1, blue) 
-		window.blit(sp_font, (sx, ay))
+        #window.blit(titlethanks, (sx, total_offset))
+	#for i,st in enumerate(SPECIAL_THANKS):
+        #	ay = sy+total_offset+20+(i*ln)
+	#	sp_font = myfont.render(st, 1, blue) 
+	#	window.blit(sp_font, (sx, ay))
 
 def draw_logo():
 	lw = logo_img.get_width()
@@ -470,6 +470,8 @@ def main():
 			draw_exit_game()
 			clock.tick(FPS)
 	                pygame.display.update()
+	except SystemExit:
+		pass
 	except :
 		print "something bad happened"
 		print "Logged into errlog.log"
