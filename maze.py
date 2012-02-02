@@ -16,6 +16,8 @@ FPS = 60
 clock = pygame.time.Clock ()
 window = pygame.display.set_mode(size)
 pygame.display.set_caption("Rects")
+iconimg = pygame.image.load("icon.png").convert_alpha()
+pygame.display.set_icon(iconimg)
 
 PLAYER = cPlayer.cPlayer(10,10,10,10)
 LEVEL = cLevel.cLevel()
