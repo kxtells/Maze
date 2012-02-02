@@ -2,13 +2,12 @@ import pygame
 import cMsg
 import cPlayer
 import cLevel
-import sys
+import sys , traceback
 import sounds as SOUNDS
 from cMenu import cMenu
 from colors import *
 from strings import *
 from attributions import *
-
 
 pygame.init()
 size = width, height = 800,600
@@ -123,6 +122,7 @@ def update_scene():
 	#	pygame.draw.rect(window, white, o)
 	
 	pygame.draw.rect(window, blue, LEVEL.START)
+	pygame.draw.lines(window, white,True, [(0,0),(800,0),(800,600),(0,600),])
 	
 	if len(LEVEL.CHECKPOINTS) > 0:
 		pygame.draw.rect(window, gray, LEVEL.END)
@@ -438,36 +438,41 @@ def exit_game():
 
                
 def main():
-	while not endgame:
-        	for event in pygame.event.get(): game_event_handler(event)
-	
+	try:
+		while not endgame:
+        		for event in pygame.event.get(): game_event_handler(event)
 		
-		if not show_menu and not show_credits: update_logic()
-		MESSAGE.update_logic(window)
-		update_scene()
-		colision_handling()
-		MESSAGE.draw(window)
-
-		if show_menu and not show_credits:
-			draw_menu(main_menu,sx=300)
-			draw_explanation()	
-			draw_cheatsheet()
-			draw_logo()	
+			
+			if not show_menu and not show_credits: update_logic()
+			MESSAGE.update_logic(window)
+			update_scene()
+			colision_handling()
+			MESSAGE.draw(window)
 	
-		if show_credits:
-			draw_credits()
-			draw_logo()
-
-		clock.tick(FPS)
-                pygame.display.update()
-
-	#when game finished
-	st_time = pygame.time.get_ticks()
-	waittime = 0
-	while waittime < 5000: #5 seconds
-		waittime = pygame.time.get_ticks() - st_time
-		draw_exit_game()
-		clock.tick(FPS)
-                pygame.display.update()
+			if show_menu and not show_credits:
+				draw_menu(main_menu,sx=300)
+				draw_explanation()	
+				draw_cheatsheet()
+				draw_logo()	
+		
+			if show_credits:
+				draw_credits()
+				draw_logo()
+	
+			clock.tick(FPS)
+	                pygame.display.update()
+	
+		#when game finished
+		st_time = pygame.time.get_ticks()
+		waittime = 0
+		while waittime < 5000: #5 seconds
+			waittime = pygame.time.get_ticks() - st_time
+			draw_exit_game()
+			clock.tick(FPS)
+	                pygame.display.update()
+	except :
+		print "something bad happened"
+		print "Logged into errlog.log"
+	        traceback.print_exc(file=open("errlog.log","a"))
 
 if __name__ == '__main__': main()  
