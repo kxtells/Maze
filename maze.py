@@ -15,7 +15,7 @@ size = width, height = 800,600
 FPS = 60
 clock = pygame.time.Clock ()
 window = pygame.display.set_mode(size)
-pygame.display.set_caption("Rects")
+pygame.display.set_caption("MAZE")
 iconimg = pygame.image.load("icon.png").convert_alpha()
 pygame.display.set_icon(iconimg)
 
