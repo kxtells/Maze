@@ -42,6 +42,7 @@ mkey_img = pygame.image.load("img/mkey.png").convert_alpha()
 pkey_img = pygame.image.load("img/pkey.png").convert_alpha()
 skey_img = pygame.image.load("img/skey.png").convert_alpha()
 ckey_img = pygame.image.load("img/ckey.png").convert_alpha()
+fkey_img = pygame.image.load("img/fkey.png").convert_alpha()
 logo_img = pygame.image.load("img/borinotlogo.png").convert_alpha()
 
 
@@ -297,6 +298,7 @@ def draw_cheatsheet():
         font3 = myfont.render("Un/Mute General sounds", 1, blue) 
         font4 = myfont.render("Un/Mute Music", 1, blue) 
         font5 = myfont.render("Credits", 1, blue) 
+        font6 = myfont.render("Toggle Fullscreen", 1, blue) 
         
 	sx = 500
 	sy = 50
@@ -304,8 +306,8 @@ def draw_cheatsheet():
 	ln=20
 
 	
-	pygame.draw.rect(window, green, (sx-10,sy-30,300,300))
-	pygame.draw.rect(window, white, (sx-5,sy-40,300,300))
+	pygame.draw.rect(window, green, (sx-10,sy-30,300,350))
+	pygame.draw.rect(window, white, (sx-5,sy-40,300,350))
 
 	window.blit(title, (sx, sy - 20 ))
 	
@@ -322,8 +324,11 @@ def draw_cheatsheet():
 	window.blit(font4, (sx + esckey_img.get_width(), sy*4 + esckey_img.get_height()/2))
 	window.blit(mkey_img,esckey_img.get_rect().move(sx,sy*4))
 
-	window.blit(font5, (sx + esckey_img.get_width(), sy*5 + esckey_img.get_height()/2))
-	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*5))
+	window.blit(font6, (sx + esckey_img.get_width(), sy*5 + esckey_img.get_height()/2))
+	window.blit(fkey_img,esckey_img.get_rect().move(sx,sy*5))
+	
+	window.blit(font5, (sx + esckey_img.get_width(), sy*6 + esckey_img.get_height()/2))
+	window.blit(ckey_img,esckey_img.get_rect().move(sx,sy*6))
 
 
 def maze_colision():
