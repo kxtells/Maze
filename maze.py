@@ -437,7 +437,7 @@ def game_event_handler(event):
 def exit_game():
 	global endgame
 	endgame = True
-
+	if fullscreen: toggle_fullscreen()
                
 def main():
 	try:
