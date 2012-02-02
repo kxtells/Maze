@@ -9,7 +9,7 @@ CP4 = ["Fourth!","One More to Go baby!","You are making a nice performance","Alr
 CP5 = ["Fifth!", "Go for it!","The GOAL is waiting","Warm Goal waiting","Go Go Go!","A little bit more!"]
 CHPSTRINGS = [CP1,CP2,CP3,CP4,CP5]
 
-D0 = ["Early Death!","You don't even tried","Not a Checkpoint eh..","Dude, so bad"]
+D0 = ["Early Death!","You don't even tried","Not a Checkpoint eh..","Dude, so bad","Lame...","looser","try harder"]
 D1 = ["At least you tried","Well, is no that bad","You learnt something?","What a pity"]
 D2 = ["Death in the middle","Two and dead","Dead and two checkpoints","...","Don't no that again"]
 D3 = ["Not Bad","Start again","Death with 3 is better than death with 5","Well, not close to win"]
