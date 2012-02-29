@@ -13,6 +13,7 @@
 
 import pygame.mixer as MIXER
 from random import randint
+from mazeconfig import *
 
 CURRSONG = -1
 NSONGS = 9
@@ -24,7 +25,7 @@ MIXER.init()
 FX = []
 
 for f in range(13):
-	fx = MIXER.Sound("fx/fx"+str(f)+".ogg")
+	fx = MIXER.Sound(getdatapath()+"fx/fx"+str(f)+".ogg")
 	FX.append(fx)
 
 
@@ -70,9 +71,9 @@ def play_music(index):
 	if not MUSICON: return
 
 	try:
-		MIXER.music.load("music/m"+str(index)+".ogg")
+		MIXER.music.load(getdatapath()+"music/m"+str(index)+".ogg")
 	except:
-		MIXER.music.load("music/m"+str(index)+".ogg")
+		MIXER.music.load(getdatapath()+"music/m"+str(index)+".ogg")
 		print "WARNING: unknow music index, loading default"	
 
 	MIXER.music.play(-1)
@@ -82,9 +83,9 @@ def play_music_random():
 	index = -1
 	while index==CURRSONG:index = randint(1,NSONGS)
 	try:
-		MIXER.music.load("music/m"+str(index)+".ogg")
+		MIXER.music.load(getdatapath()+"music/m"+str(index)+".ogg")
 	except:
-		MIXER.music.load("music/m"+str(index)+".ogg")
+		MIXER.music.load(getdatapath()+"music/m"+str(index)+".ogg")
 		print "WARNING: unknow music index, loading default"	
 
 	MIXER.music.play(-1)

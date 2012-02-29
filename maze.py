@@ -8,6 +8,7 @@ from cMenu import cMenu
 from colors import *
 from strings import *
 from attributions import *
+from mazeconfig import *
 
 pygame.init()
 size = width, height = 800,600
@@ -16,7 +17,7 @@ FPS = 60
 clock = pygame.time.Clock ()
 window = pygame.display.set_mode(size)
 pygame.display.set_caption("MAZE")
-iconimg = pygame.image.load("icon.png").convert_alpha()
+iconimg = pygame.image.load(getdatapath()+"icon.png").convert_alpha()
 pygame.display.set_icon(iconimg)
 
 PLAYER = cPlayer.cPlayer(10,10,10,10)
@@ -30,6 +31,7 @@ fullscreen = False
 SOUNDS.play_music(9)
 MESSAGE = cMsg.cMsg("TEST",window)
 
+
 #
 # Menus
 #
@@ -37,14 +39,14 @@ MESSAGE = cMsg.cMsg("TEST",window)
 #Main Menu
 main_menu_texts = 'Boring', 'Easy' , 'Normal' , 'Difficult' , 'Extreme', 'Insane'
 main_menu = cMenu(main_menu_texts,"Difficulty",0,blue,red)
-main_menu_img1 = pygame.image.load("img/arrkeys.png").convert_alpha()
-esckey_img = pygame.image.load("img/esckey.png").convert_alpha()
-mkey_img = pygame.image.load("img/mkey.png").convert_alpha()
-pkey_img = pygame.image.load("img/pkey.png").convert_alpha()
-skey_img = pygame.image.load("img/skey.png").convert_alpha()
-ckey_img = pygame.image.load("img/ckey.png").convert_alpha()
-fkey_img = pygame.image.load("img/fkey.png").convert_alpha()
-logo_img = pygame.image.load("img/borinotlogo.png").convert_alpha()
+main_menu_img1 = pygame.image.load(getdatapath()+"img/arrkeys.png").convert_alpha()
+esckey_img = pygame.image.load(getdatapath()+"img/esckey.png").convert_alpha()
+mkey_img = pygame.image.load(getdatapath()+"img/mkey.png").convert_alpha()
+pkey_img = pygame.image.load(getdatapath()+"img/pkey.png").convert_alpha()
+skey_img = pygame.image.load(getdatapath()+"img/skey.png").convert_alpha()
+ckey_img = pygame.image.load(getdatapath()+"img/ckey.png").convert_alpha()
+fkey_img = pygame.image.load(getdatapath()+"img/fkey.png").convert_alpha()
+logo_img = pygame.image.load(getdatapath()+"img/borinotlogo.png").convert_alpha()
 
 
 def main_menu_selection():
